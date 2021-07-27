@@ -400,219 +400,50 @@
                     <th scope="col"></th>
                   </tr>
                 </thead>
-                <tbody class="list">
-                  <% for(let project of data.Projects){%>
+                <tbody class="list" id="projects">
+                  <% let techColor = {} %>
+                  <% let projectCompletionColor = {'Progress' : 'primary','Delayed' : 'warning','Failed' : 'danger','Completed' : 'success'} %>
+                  <% let color = ['primary', 'secondary', 'info', 'success', 'warning', 'danger'] %>
+                  <% for(let Project of data.Projects){%>
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="project mb-0 text-sm"><%=Project.name%></span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <span class="type"><%=Project.type%></span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <i class="bg-<%= projectCompletionColor[`${Project.completion}`] %>"></i>
+                        <span class="completion"><%=Project.completion%></span>
+                      </span>
+                    </td>
+                    <td>
+                      <% for(let Technology of Project.technologies.slice(0,5)){ %>
+                        <% if(!techColor[`${Technology}`]) { %>
+                          <% techColor[`${Technology}`] = color[Math.floor(Math.random() * color.length)] %>
+                        <% }%>
+                        <span class="badge badge-pill badge-<%= techColor[`${Technology}`] %>"><%=Technology %></span>
+                      <% } %>
+                    </td>
+                    <td class="text-right">
+                      <button class="btn btn-icon btn-outline-success btn-sm" type="button">
+                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
+                      </button>
+                    </td>
+                  </tr>
                   <% }%>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="project mb-0 text-sm">Project 1</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <span class="type">Mini Project</span>
-                      </span>
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-success"></i>
-                        <span class="completion">completed</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="../public/images/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="../public/images/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="../public/images/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="../public/images/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <button class="btn btn-icon btn-outline-success btn-sm" type="button">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="project mb-0 text-sm">Project 2</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <span class="type">Course Project</span>
-                      </span>
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-primary"></i>
-                        <span class="completion">progress</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="../public/images/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="../public/images/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="../public/images/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="../public/images/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <button class="btn btn-icon btn-outline-success btn-sm" type="button">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="project mb-0 text-sm">Project 3</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <span class="type">Job Project</span>
-                      </span>
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i>
-                        <span class="completion">delayed</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="../public/images/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="../public/images/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="../public/images/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="../public/images/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <button class="btn btn-icon btn-outline-success btn-sm" type="button">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="project mb-0 text-sm">Project 4</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <span class="type">Job Project</span>
-                      </span>
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-danger"></i>
-                        <span class="completion">failed</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="../public/images/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="../public/images/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="../public/images/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="../public/images/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <button class="btn btn-icon btn-outline-success btn-sm" type="button">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="project mb-0 text-sm">Project 5</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <span class="type">Course Project</span>
-                      </span>
-                    </td>
-                    <td>
-                      <span class="badge badge-dot mr-4">
-                        <i class="bg-success"></i>
-                        <span class="completion">completed</span>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="../public/images/theme/team-1.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="../public/images/theme/team-2.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="../public/images/theme/team-3.jpg">
-                        </a>
-                        <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="../public/images/theme/team-4.jpg">
-                        </a>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <button class="btn btn-icon btn-outline-success btn-sm" type="button">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                      </button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
             <!-- Card footer -->
-            <div class="card-footer py-4">
+            <!-- <div class="card-footer py-4">
               <nav aria-label="...">
                 <ul class="pagination justify-content-lg-end justify-content-center mb-0">
                   <li class="page-item disabled">
@@ -636,7 +467,7 @@
                   </li>
                 </ul>
               </nav>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-xl-12 order-xl-2">
@@ -1137,8 +968,8 @@
   <script src="../public/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="../public/javascripts/argon.js?v=1.2.0"></script>
-  <script type="text/javascript">
-    console.log('<%=data.SocialMedia.telegram%>')
+  <script>
+    let Project = <%= data.Projects%>;
   </script>
 </body>
 
